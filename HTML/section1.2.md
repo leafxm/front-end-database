@@ -1,6 +1,6 @@
 # 关于HTML5
 
-HTML5主要有新标签、新表单特性、Canvas、数据存储、引入多媒体、新的网络连接协议、模拟多线程的web worker等方面的内容。
+HTML5主要有新标签、新表单特性、Canvas、数据存储、新的网络连接协议、模拟多线程的web worker，还有引入多媒体、地理应用、微数据等方面的内容。
 ## 新标签
 html5新增了一些结构型和语义化的标签，比如：section、header、footer、nav、article和aside、figure等。
 
@@ -70,7 +70,6 @@ HTML5 使用 JavaScript 来存储和访问数据。
  Cache Manifest
 ### 和cookie的对比
 
-## 多媒体
 
 ## Web socket
 
