@@ -87,7 +87,9 @@ HTML5 不基于 SGML，所以不需要引用 DTD。
 
 name 和 content 属性的作用是描述页面的内容。
 
+编写移动端页面时可以使用如下meta视口来实现一个完美视口：
 
+```<meta name="viewport" content="width=device-width, initial-scale=1.0 "/>```
 
 
 
