@@ -1,6 +1,6 @@
 # 关于HTML5
 
-HTML5主要有新标签、新表单特性、Canvas、引入多媒体、数据存储、新的网络连接协议、模拟多线程的web worker等方面的内容。
+HTML5主要有新标签、新表单特性、Canvas、数据存储、引入多媒体、新的网络连接协议、模拟多线程的web worker等方面的内容。
 ## 新标签
 html5新增了一些结构型和语义化的标签，比如：section、header、footer、nav、article和aside、figure等。
 
@@ -61,13 +61,20 @@ SVG 是一种使用 XML 描述 2D 图形的语言，Canvas 通过 JavaScript 来
 
 ## 数据存储
 HTML5 提供了两种在客户端存储数据的新方法：
-•	localStorage - 没有时间限制的数据存储
-•	sessionStorage - 针对一个 session 的数据存储。当用户关闭浏览器窗口后，数据会被删除。
+- localStorage  没有时间限制的数据存储
+- sessionStorage  针对一个 session 的数据存储。当用户关闭浏览器窗口后，数据会被删除。
+
 HTML5 使用 JavaScript 来存储和访问数据。
 
 应用程序缓存
  Cache Manifest
-Web Worker
+### 和cookie的对比
+
+## 多媒体
+
+## Web socket
+
+## Web Worker
 当在 HTML 页面中执行脚本时，页面的状态是不可响应的，直到脚本已完成。
 web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。您可以继续做任何愿意做的事情：点击、选取内容等等，而此时 web worker 在后台运行。模拟出web多线程
 服务器发送事件
