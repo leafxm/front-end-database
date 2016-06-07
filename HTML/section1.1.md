@@ -69,15 +69,22 @@ HTML5 不基于 SGML，所以不需要引用 DTD。
       
 -  ```<meta>``` 元素
 元数据（metadata）是关于数据的信息。
+
 ```<meta> ```标签提供关于 HTML 文档的元数据。元数据不会显示在页面上，但是对于机器是可读的。
 典型的情况是，meta 元素被用于规定页面的描述、关键词、文档的作者、最后修改时间以及其他元数据。
+
 元数据可用于浏览器（如何显示内容或重新加载页面），搜索引擎（关键词），或其他 web 服务。
-针对搜索引擎的关键词
+
 一些搜索引擎会利用 meta 元素的 name 和 content 属性来索引您的页面。
+
 下面的 meta 元素定义页面的描述：
+
 ```<meta name="description" content="Free Web tutorials on HTML, CSS, XML" />```
+
 下面的 meta 元素定义页面的关键词：
+
 ```<meta name="keywords" content="HTML, CSS, XML" />```
+
 name 和 content 属性的作用是描述页面的内容。
 
 
