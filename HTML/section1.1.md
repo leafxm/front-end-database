@@ -52,13 +52,18 @@ HTML 是用来描述网页的一种语言。
 HTML5 不基于 SGML，所以不需要引用 DTD。
 
 ## ```<head>``` 元素
-<head> 元素是所有头部元素的容器。<head> 内的元素可包含脚本，指示浏览器在何处可以找到样式表，提供元信息，等等。
-以下标签都可以添加到 head 部分：<title>、<base>、<link>、<meta>、<script> 以及 <style>。
-<base> 标签为页面上的所有链接规定默认地址或默认目标（target）：
-<head>
-<base href="http://www.w3school.com.cn/images/" />
-<base target="_blank" />
-</head>
+
+是所有头部元素的容器，其中的元素可包含脚本，指示浏览器在何处可以找到样式表，提供元信息，等等，比如：
+```<title>、<base>、<link>、<meta>、<script> 以及 <style>```。
+
+
+其中 ```<base> ``` 元素为页面上的所有链接规定默认地址或默认目标（target）：
+
+      <head>
+        <base href="http://www.w3school.com.cn/images/" />
+        <base target="_blank" />
+      </head>
+      
 HTML <meta> 元素
 元数据（metadata）是关于数据的信息。
 <meta> 标签提供关于 HTML 文档的元数据。元数据不会显示在页面上，但是对于机器是可读的。
