@@ -2,14 +2,14 @@
 
 HTML5主要有新标签、新表单特性、Canvas、数据存储、新的网络连接协议web socket、模拟多线程的web worker，还有引入多媒体、地理应用等方面的内容。
 ##新的Doctype
-使用```<!DOCTYPE html>  ```
+HTML5 不基于 SGML，所以不需要引用 DTD。只需使用```<!DOCTYPE html>  ```即可。
 ## 新标签
 html5新增了一些结构型和语义化的标签，比如：section、header、footer、nav、article和aside、figure等。
 
 其中，section用来定义文档中的区域（或节），nav表示主导航区域，article侧重于表示是内容片断，而aside用来表示与页面内容松散相关的内容，可用来做侧边栏、引文、广告等。
 
 ## 表单元素
-### input元素
+###1. input元素
 html5提供了让```<input>```的type特性有更多的值：
 
 - email
@@ -27,7 +27,7 @@ html5提供了让```<input>```的type特性有更多的值：
 - pattern： 一个正则表达式，用于检查控件的值，能够作用于 type 值是 text， tel， search， url， 和 email 的 input 元素。
 - form： 一个字符串，用于表明该 input 属于哪个 <form> 元素。一个 input 只能存在于一个表单中。
 
-### datalist元素
+###2. datalist元素
 datalist 元素规定输入域的选项列表。列表通过 datalist 内的 option 元素创建的。
 
 <input id="awardWon" name="awardWon" type="text" list="awards">
@@ -38,10 +38,10 @@ datalist 元素规定输入域的选项列表。列表通过 datalist 内的 opt
   </select>
 </datalist>
 
-### output元素
+### 3.output元素
 自动提交计算结果
 
-### 新属性
+###4. 新属性
 - autofocus 页面刚打开的时候焦点设置到某个文本框
 - placeholder 输入之前的灰色的字，用来提醒
 - required 表示必须输入，没输入会有异性
@@ -114,5 +114,8 @@ web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影�
 
 dataTransfer 对象是事件e的对象，用来保存被拖拽的数据。有用来设置拖拽效果的属性和用来设置拖拽数据的方法。
 
-## contentEditable属性
+## contentEditable 属性
 通过在元素上设置contentEditable="true"可以让元素变成可编辑状态。
+
+## data 属性
+使用“data-”开头定义自定义属性。在js中可以通过getAttribute来获得，在css中可以通过attr()来获得，可以用于给hover伪类的content赋值。
