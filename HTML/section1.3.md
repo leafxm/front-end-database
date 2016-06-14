@@ -1,71 +1,67 @@
 # 面试题目
 
-面试题目
-标签
-•	行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
+## 关于标签
+### 行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
+
 CSS规范规定，每个元素都有默认的display值，如div的display默认值为“block”，则为“块级”元素；span默认display属性值为“inline”，是“行内”元素。
+
 （1）行内元素有：a span img input select strong
 （2）块级元素有：div ul ol li dl dt dd h1-h6 p
-（3）常见的空元素：<br> <hr> <img> <input> <link> <meta>
-•	<strong>，<em>和<b>，<i>标签
-从表现形式上来看，<em> 和<i>都是表现为斜体，<strong>和<b>都是表现为加粗。
-从意义上来看，<b> <i>是视觉要素，分别表示无意义的加粗，无意义的斜体。 <em> 和 <strong> 是表达要素(phrase elements)。< em > （emphasized text）表示一般的强调文本，而 < strong > （strong emphasized text）表示比 < em > 语义更强的的强调文本。
-•	label的作用是什么？是怎么用的？
-label标签来定义表单控件间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。
-<label for="Name">Number:</label>
-<input type=“text“name="Name" id="Name"/>
-<label>Date:<input type="text" name="B"/></label>
-•	iframe有那些缺点？
+（3）常见的空元素：```<br> <hr> <img> <input> <link> <meta>```
+
+HTML5中对块级、行内元素没有明确定义。
+
+###	```<strong>，<em>和<b>，<i>```标签的区别
+从表现形式上来看，```<em> 和<i>```都是表现为斜体，```<strong>和<b>```都是表现为加粗。
+从意义上来看，```<b> <i>```是视觉要素，分别表示无意义的加粗，无意义的斜体。 ```<em> 和 <strong>``` 是表达要素(phrase elements)。```< em > ```（emphasized text）表示一般的强调文本，而 ```< strong >``` （strong emphasized text）表示比``` < em >``` 语义更强的的强调文本。
+
+###	label标签的作用是什么？是怎么用的？
+label标签来定义表单控件间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。两种用法：
+  
+    <label for="Name">Number:</label>
+    <input type=“text“name="Name" id="Name"/>
+    
+    <label>Date:<input type="text" name="B"/></label>
+    
+###iframe有哪些缺点？
 是什么：iframe 元素会创建包含另外一个文档的内联框架（即行内框架）
-缺点：iframe会阻塞主页面的Onload事件；
-iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
+
+缺点：
+- iframe会阻塞主页面的Onload事件；
+- iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
+
 使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript动态给iframe添加src属性值，这样可以可以绕开以上两个问题。
-兼容
-•	常见兼容性问题？
-o	png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8.
-o	浏览器默认的margin和padding不同。解决方案是加一个全局的*{margin:0;padding:0;}来统一。
-o	浮动ie产生的双倍距离 #box{ float:left; width:100px; margin:0 0 0 10px;}这种情况之下IE会产生20px的距离，解决方案是在float的标签样式控制中加入 _display:inline;将其转化为行内属性。(_这个符号只有ie6会识别)
-o	解决ie的兼容性问题，可以使用渐进识别的方式，从总体中逐渐排除局部。首先，巧妙的使用“\9”这一标记，将IE游览器从所有情况中分离出来。接着，再次使用“+”将IE8和IE7、IE6分离开来，这样IE8已经独立识别。
-  .bb{
- background-color:#f1ee18;/*所有识别*/
- .background-color:#00deff\9; /*IE6、7、8识别*/
-  +background-color:#a200ff;/*IE6、7识别*/
-_background-color:#1e0bd1;/*IE6识别*/
-}
-o	IE下,可以使用获取常规属性的方法来获取自定义属性,也可以使用getAttribute()获取自定义属性;Firefox下,只能使用getAttribute()获取自定义属性.解决方法:统一通过getAttribute()获取自定义属性.
-o	IE下,event对象有x,y属性,但是没有pageX,pageY属性;Firefox下,event对象有pageX,pageY属性,但是没有x,y属性.解决方法：（条件注释）缺点是在IE浏览器下可能会增加额外的HTTP请求数。
-o	Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决.
-o	超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了.解决方法是改变CSS属性的排列顺序:L-V-H-A : a:link {} a:visited {} a:hover {} a:active {}
-HTML5相关问题
-•	HTML5 为什么只需要写 <!DOCTYPE HTML>？
+
+##HTLM5
+###	HTML5 为什么只需要写 <!DOCTYPE HTML>？
 HTML5 不基于 SGML，因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为（让浏览器按照它们应该的方式来运行）；而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。
-•	html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和HTML5？
-HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。新特性有：
+
+###html5有哪些新特性？
+
 绘画 canvas ；用于媒介回放的 video 和 audio 元素
 本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失
 sessionStorage 的数据在浏览器关闭后自动删除
 语意化更好的内容元素，比如 article、footer、header、nav、section
 表单控件，calendar、date、time、email、url、search
 新的技术webworker, websockt, Geolocation
-o	移除的元素
-纯表现的元素：basefont，big，center，font, s，strike，tt，u；
-对可用性产生负面影响的元素：frame，frameset，noframes；
-o	兼容性问题：
+###HTML5移除了那些元素？
+
+- 纯表现的元素：basefont，big，center，font, s，strike，tt，u；
+- 对可用性产生负面影响的元素：frame，frameset，noframes；
+
+### 如何处理HTML5新标签的IE浏览器兼容问题？
+
 IE8/IE7/IE6支持通过document.createElement方法产生的标签，
 可以利用这一特性让这些浏览器支持HTML5新标签，浏览器支持新标签后，
-还需要添加标签默认的样式；
+还需要添加标签默认的样式。
+
 当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架
 <!--[if lt IE 9]>
 <script> src="http://html5shim.googlecode.com/
 svn/trunk/html5.js"</script>
 <![endif]-->
-•	HTML5的离线储存？
-o	localStorage 长期存储数据，浏览器关闭后数据不丢失；
-o	sessionStorage 数据在浏览器关闭后自动删除。
-在用户没有与因特网连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件。 原理：HTML5的离线存储是基于一个新建的.appcache文件的缓存机制(不是存储技术)，通过这个文件上的解析清单离线存储资源，这些资源就会像cookie一样被存储了下来。之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示。
-在离线状态时，操作window.applicationCache进行需求实现。
-•	浏览器是怎么对HTML5的离线储存资源进行管理和加载的呢？
-在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。离线的情况下，浏览器就直接使用离线存储的资源。
+
+
 •	HTML5的form如何关闭自动完成功能？
 o	给不想要提示的 form 或下某个input 设置为 autocomplete=off。
 其他
@@ -157,82 +153,6 @@ http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/#Themainflow
 •	比如 lazy loading of images,当图片要展示的时候js再加载它而不是在页面加载的时候就把全部图片加载完
 •	比如 prioritizing visible content，仅包括页面需要的最少的必要css/内容/脚本 让页面尽快在浏览器渲染展示出来，然后利用 defer的js来加载其他资源和内容
 
-title:  前端面试题目HTML部分总结
-
-## 标签
-- 行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
-
-	- CSS规范规定，每个元素都有默认的display值，如div的display默认值为“block”，则为“块级”元素；span默认display属性值为“inline”，是“行内”元素。
-
-	- （1）行内元素有：`a span img input select strong`
-	- （2）块级元素有：`div ul ol li dl dt dd h1-h6 p`
-	- （3）常见的空元素：`<br> <hr> <img> <input> <link> <meta>`
-	- 全部块级元素：    
-    
-			<div>文档分区。<p>行。<h1>-<h6>标题级别 1-6.
-			<dd>定义列表中定义条目描述。<dl>定义列表。
-			<ol>有序列表。<ul>无序列表。
-			<table>表格<form>表单。	
-			<address>联系方式信息。<blockquote>块引用。
-			<fieldset>表单元素分组。
-			<hr>水平分割线。
-			<noscript>不支持脚本或禁用脚本时显示的内容。
-			<pre>预格式化文本。
-			<tfoot>表脚注。
-			HTML5：虽然”块级“在新的 HTML5 元素中没有明确定义
-			<article> 文章内容。<aside> 伴随内容。		
-			<audio> 音频播放。<video> 视频。
-			<canvas> 绘制图形。
-			<figcaption> 图文信息组标题
-			<figure> 图文信息组 (参照 <figcaption>)。
-			<footer> 区段尾或页尾。<header> 区段头或页头	
-			<hgroup> 标题组。
-			<output> 表单输出。
-			<section> 一个页面区段。
-
-
-- `<strong>`，`<em>`和`<b>`，`<i>`标签
-
-		从表现形式上来看，<em> 和<i>都是表现为斜体，<strong>和<b>都是表现为加粗。
-		从意义上来看，<b> <i>是视觉要素，分别表示无意义的加粗，无意义的斜体。
-		 <em> 和 <strong> 是表达要素(phrase elements)。
-		<em> （emphasized text）表示一般的强调文本，
-		而 < strong > （strong emphasized text）表示比 < em > 语义更强的的强调文本。
-
-- label的作用是什么？是怎么用的？
-
-label标签来定义表单控件间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。
-
-	<label for="Name">Number:</label>
-	<input type=“text“name="Name" id="Name"/>
-	<label>Date:<input type="text" name="B"/></label>
-
-- iframe有那些缺点？
-	- 是什么：iframe 元素会创建包含另外一个文档的内联框架（即行内框架）
-  	- iframe会阻塞主页面的Onload事件；
-   - iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
-   -	使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript动态给iframe添加src属性值，这样可以绕开以上两个问题。
-
-
-## 兼容
-- 常见兼容性问题？
-
-	- png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8.
-	- 浏览器默认的margin和padding不同。解决方案是加一个全局的*{margin:0;padding:0;}来统一。
-	- 浮动ie产生的双倍距离 `#box{ float:left; width:100px; margin:0 0 0 10px;}`这种情况之下IE会产生20px的距离，解决方案是在float的标签样式控制中加入 `_display:inline;`将其转化为行内属性。(_这个符号只有ie6会识别)
-	- 解决ie的兼容性问题，可以使用渐进识别的方式，从总体中逐渐排除局部。首先，巧妙的使用“\9”这一标记，将IE游览器从所有情况中分离出来。接着，再次使用“+”将IE8和IE7、IE6分离开来，这样IE8已经独立识别。
-	
-			  .bb{
-			   background-color:#f1ee18;/*所有识别*/
-			  .background-color:#00deff\9; /*IE6、7、8识别*/
-			  +background-color:#a200ff;/*IE6、7识别*/
-			  _background-color:#1e0bd1;/*IE6识别*/
-			  }
-
-	- IE下,可以使用获取常规属性的方法来获取自定义属性,也可以使用getAttribute()获取自定义属性;Firefox下,只能使用getAttribute()获取自定义属性.解决方法:统一通过getAttribute()获取自定义属性.
-	- IE下,event对象有x,y属性,但是没有pageX,pageY属性;Firefox下,event对象有pageX,pageY属性,但是没有x,y属性.解决方法：（条件注释）缺点是在IE浏览器下可能会增加额外的HTTP请求数。
-	- Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决.
-	- 超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了.解决方法是改变CSS属性的排列顺序:L-V-H-A : a:link {} a:visited {} a:hover {} a:active {}
 
 ##HTML5
 - HTML5 为什么只需要写 <!DOCTYPE HTML>？
