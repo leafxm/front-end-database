@@ -1,6 +1,8 @@
 # 关于HTML5
 
-HTML5主要有新标签、新表单特性、Canvas、数据存储、新的网络连接协议、模拟多线程的web worker，还有引入多媒体、地理应用、微数据等方面的内容。
+HTML5主要有新标签、新表单特性、Canvas、数据存储、新的网络连接协议web socket、模拟多线程的web worker，还有引入多媒体、地理应用等方面的内容。
+##新的Doctype
+使用```<!DOCTYPE html>  ```
 ## 新标签
 html5新增了一些结构型和语义化的标签，比如：section、header、footer、nav、article和aside、figure等。
 
@@ -19,7 +21,7 @@ html5提供了让```<input>```的type特性有更多的值：
 - color 选择颜色以RGB方式记录显示
 - progress 进度条
  
-也有一些新特性：
+也有一些新属性：
 
 - list： <datalist> 元素的 ID，该元素的内容，<option> 元素被用作提示信息，会在 input 的建议区域作为提议显示出来。
 - pattern： 一个正则表达式，用于检查控件的值，能够作用于 type 值是 text， tel， search， url， 和 email 的 input 元素。
@@ -66,20 +68,51 @@ HTML5 提供了两种在客户端存储数据的新方法：
 
 HTML5 使用 JavaScript 来存储和访问数据。
 
-应用程序缓存
- Cache Manifest
-### 和cookie的对比
-
+### 和cookie的区别
+   - cookie数据始终在同源的http请求中携带（即使不需要），所以会在浏览器和服务器间来回传递。 sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存；
+   - sessionStorage和localStorage的存储空间更大；
+   - sessionStorage和localStorage有更多丰富易用的接口，比如setItem,getItem,removeItem,clear等方法，而cookie需要前端开发者自己封装setCookie，getCookie。
+   - sessionStorage和localStorage有各自独立的存储空间；
+   - 有期时间：
+    - localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
+    - sessionStorage  数据在当前浏览器窗口关闭后自动删除。
+    - cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
 
 ## Web socket
+是一种不同于HTTP的通信协议。最大特点是可以双向通信。事件驱动，常见事件有open、message、error、close等。使用send方法发送数据，监听message事件来接收服务器发回的数据。可以持续连接数据流，流量小，适合做监听状态的工作，游戏、股票、实时视频等。使用全双工工作方式。
+
+
 
 ## Web Worker
 当在 HTML 页面中执行脚本时，页面的状态是不可响应的，直到脚本已完成。
-web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。您可以继续做任何愿意做的事情：点击、选取内容等等，而此时 web worker 在后台运行。模拟出web多线程
-服务器发送事件
-Server-Sent 事件 - 单向消息传递
-Server-Sent 事件指的是网页自动获取来自服务器的更新。
-以前也可能做到这一点，前提是网页不得不询问是否有可用的更新。通过服务器发送事件，更新能够自动到达。
-例子：Facebook/Twitter 更新、估价更新、新的博文、赛事结果等。
+web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。主要作用是模拟出web多线程。子线程完全受主线程控制，不可访问 DOM APIs。
 
+可以用于：
+- 数据的计算和加密 如计算斐波拉契函数的值，特别费时；再比如文件的 MD5 值比对，一个大文件的 MD5 值计算也是很费时的。
+- 音、视频流的编解码工作，这些工作搞微信的技术人员应该没有少做。有兴趣的童鞋可以看看这个技术分享，是杭州的 hehe123 搞的一个WebRTC 分享，内容还不错。
+- 等等，你觉得费时间的事情都可以交给他做
 
+## 多媒体
+引入```<vidio>```和```<audio>```标签。
+
+## draggable属性
+给元素设置draggable="true"，它就可以被拖拽了。通过拖放事件，可以控制拖放相关的各个方面。
+
+拖动一个元素时，将依次触发下列事件（作用于被拖动的元素）：
+	1. dragstart 按下鼠标键并开始移动鼠标时，会在被拖放的元素上触发
+	2. drag 元素被拖动期间会持续触发该事件
+	3. dragend 拖动停止时触发（无论是把元素放到了有效的放置目标，还是无效的放置目标上）
+
+默认情况下，浏览器不会在拖动期间改变被拖动元素的外观，但你可以自己修改。不过，大多数浏览器会为正被拖动的元素创建一个半透明的副本，这个副本始终跟随着光标移动。
+
+当元素被拖放到一个有效的放置目标上时，下列事件会依次发生（作用于作为放置目标的元素）：
+	1. dragenter 元素被拖动到放置目标上时触发
+	2. dragover 被拖动的元素还在放置目标的范围内移动时，就会持续触发该事件
+	3. drop 被拖拽的元素在目标元素上同时鼠标放开触发该事件
+	
+在dragover中一定要执行preventDefault()，否则ondrop事件不会被触发。
+
+dataTransfer 对象是事件e的对象，用来保存被拖拽的数据。有用来设置拖拽效果的属性和用来设置拖拽数据的方法。
+
+## contentEditable属性
+通过在元素上设置contentEditable="true"可以让元素变成可编辑状态。
