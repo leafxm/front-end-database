@@ -8,6 +8,6 @@
 * [CSS](CSS/README.md)
    * [基础知识](CSS/section2.1.md)
    * [关于CSS3](CSS/section2.2.md)
-   * [关于布局](HTML/section2.3.md)
+   * [关于布局](CSS/section2.3.md)
    * [面试题目](HTML/section2.4.md)
 
