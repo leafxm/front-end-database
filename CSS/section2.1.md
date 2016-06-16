@@ -17,15 +17,15 @@
 7. 伪元素选择器(::fist-line,::first-letter,::after,::before)
 8. 伪类选择器
 
-  8.1 结构型伪类选择器(:root,:first-child,:last-chilid,:nth-child(n),:nth-last-child(n),:only-child,:empty...)
+  - 结构型伪类选择器(:root,:first-child,:last-chilid,:nth-child(n),:nth-last-child(n),:only-child,:empty...)
 
-  以上child都可以换成of-type。两者的区别是：child是在父元素的所有子元素（包括不同类型）中定位，如果这个元素符合前面的选择器就选中；而of-type是在父元素所有符合前面选择器（都是同类型）的子元素中定位。
+    以上child都可以换成of-type。两者的区别是：child是在父元素的所有子元素（包括不同类型）中定位，如果这个元素符合前面的选择器就选中；而of-type是在父元素所有符合前面选择器（都是同类型）的子元素中定位。
 
- 8.2 链接伪类选择符（:link,:visited)
- 8.3 用户行为伪类选择符（:hover,:active,:focus)
- 8.4 目标伪类选择符（:target 当一个元素被指向URI目标时）
- 8.5 元素状态伪类选择符（:enabled,:disabled,:checked）		
- 8.6 逻辑性伪类选择符(:not(s))
+ - 链接伪类选择符（:link,:visited)
+ - 用户行为伪类选择符（:hover,:active,:focus)
+ - 目标伪类选择符（:target 当一个元素被指向URI目标时）
+ - 元素状态伪类选择符（:enabled,:disabled,:checked）		
+ - 逻辑性伪类选择符(:not(s))
 
 ### 优先级计算	
 
@@ -88,6 +88,7 @@
 - 列表相关的list-style-image, list-style-position,list-style-type, list-style
 - 其他 color、visibility等
 - 不可继承的样式：border padding margin width height（盒模型）
+
 ### 书写顺序
 1. 位置属性(position, top, right, z-index, display, float等)
 2. 大小(width, height, padding, margin)
@@ -96,7 +97,19 @@
 5. 其他(animation, transition等)
 
 
+### 属性值中的百分比相对于什么来计算？
+关于百分比是相对宽度高度这个那个计算很容易搞混，总结如下：
 
+- 乘以包含块的宽度： margin, padding, left, right, text-indent, width, max-width, min-width
+- 乘以包含块的高度： top, bottom, height, max-height, min-height
+- 乘以元素的字体大小：line-height
+- 乘以元素的行高：vertical-align
+- 背景定位中的百分比 background-position 分别设置水平方向和垂直方向上的两个值，如果使用百分比，那么百分比值会同时应用于元素和图像。例如 50% 50% 会把图片的（50%, 50%）这一点与框的（50%, 50%）处对齐，相当于设置了 center center。同理 0% 0% 相当于 left top，100% 100% 相当于 right bottom。
+- 字体大小中的百分比 font-size 中的百分比值应该乘以元素所继承到的字体大小，也就是父元素的字体大小。
+
+百分比的继承：如果某个元素设置了百分比的属性，则后代元素继承的是计算后的值
+
+以上引用自[CSS属性之经常出现的百分比](http://www.w3ctech.com/topic/128)
 ## 盒模型
 ### 是什么？
 盒模型包括： 内容(content)、填充(padding)、边框(border)、边界(margin)。 
@@ -180,40 +193,33 @@ float高度塌陷解决方案：
 层叠上下文：层叠上下文是HTML元素的三维概念，这些HTML元素在一条假想的相对于面向（电脑屏幕的）视窗或者网页的用户的z轴上延伸，HTML元素依据其自身属性按照优先级顺序占用层叠上下文的空间。
 
 层叠水平：决定了同一个层叠上下文中元素在z轴上的显示顺序。层叠水平的比较只有在当前层叠上下文元素中才有意义。
-
-层叠顺序：元素发生层叠时候有着特定的垂直显示顺序。
+![](http://mmbiz.qpic.cn/mmbiz/zPh0erYjkib0TXMuJRGH7TPOQvyawxuLGGSRb5ujzXtCfTjx6VNXZIN5x9Q92gbWo2hWZwB7PvDvVT3HRML7icDg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
+层叠顺序：元素发生层叠时候的特定的垂直显示顺序。
 
 原则：
-- 谁大谁上：当具有明显的层叠水平标示的时候，如识别的z-indx值，在同一个层叠上下文领域，层叠水平值大的那一个覆盖小的那一个。通俗讲就是官大的压死官小的。
+- 谁大谁上：当具有明显的层叠水平标示的时候，如识别的z-indx值，在同一个层叠上下文领域，层叠水平值大的那一个覆盖小的那一个。
 - 后来居上：当元素的层叠水平一致、层叠顺序相同的时候，在DOM流中处于后面的元素会覆盖前面的元素。
+
+常见的创建层叠上下文的方法：
+- 定位元素中z-index不等于auto的会为该元素创建层叠上下文
+- html根元素默认会创建层叠上下文
+- 元素的opacity不等于1会创建层叠上下文
+- 元素的transform不等于none会创建层叠上下文
+
 
 z-index可以设置成三个值：
 - auto，默认值。当设置为auto的时候，当前元素的层叠级数是0，同时这个盒不会创建新的层级上下文（除非是根元素，即<html>）；
-- <integer>。指示层叠级数，可以使负值，同时无论是什么值，都会创建一个新的层叠上下文；
+- <integer>。指示层叠级数，可以是负值，同时无论是什么值，都会创建一个新的层叠上下文；
 - inherit。父元素继承
 
-z-index属性目前只有在position:relative、position:absolute和position:fixed参与的情况下才有作用，表示层级，类似photoshop中层级的概念。
+z-index属性目前只有在position:relative、position:absolute和position:fixed参与的情况下才有作用，表示层级。
 
-
-先说一下如果创建层叠上下文，css创建层叠上下文的方法有很多，但是常用的也就够那么几种
-
-	1. 定位元素中z-index不等于auto的会为该元素创建层叠上下文
-	2. html根元素默认会创建层叠上下文（这是一个特例，知道就行）
-	3. 元素的opacity不等于1会创建层叠上下文
-
-元素的transform不等于none会创建层叠上下文
-
-	1. z-index仅在定位元素（position不等于static）中有效
-	2. 七阶层叠水平图
-	3. z-index层叠水平的比较仅限于父级层叠上下文中
-
 其次需要注意以下几点：
-　　
-	1. 在开发中尽量避免层叠上下文的多层嵌套，因为层叠上下文嵌套过多的话容易产生混乱，如果对层叠上下文理解不够的话是不好把控的。　　
-	2. 非浮层元素（对话框等）尽量不要用z-index（通过层叠顺序或者dom顺序或者通过层叠上下文进行处理）　
-	3. z-index设置数值时尽量用个位数
-![](http://mmbiz.qpic.cn/mmbiz/zPh0erYjkib0TXMuJRGH7TPOQvyawxuLGGSRb5ujzXtCfTjx6VNXZIN5x9Q92gbWo2hWZwB7PvDvVT3HRML7icDg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1)
-参考 [深入理解CSS中的层叠上下文和层叠顺序](http://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)
+- 在开发中尽量避免层叠上下文的多层嵌套，因为层叠上下文嵌套过多的话容易产生混乱，如果对层叠上下文理解不够的话是不好把控的。　　
+- 非浮层元素（对话框等）尽量不要用z-index（通过层叠顺序或者dom顺序或者通过层叠上下文进行处理）　
+- z-index设置数值时尽量用个位数
+
+参考 [深入理解CSS中的层叠上下文和层叠顺序](http://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/) 和
 [不起眼的 z-index 却能牵扯出这么大的学问](http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651550819&idx=1&sn=7693f3c2a9d925bf069a08de90705682&scene=1&srcid=0508Uhp17Oga5IQzT9HDhUac#rd)
 
 ### BFC 规范
@@ -247,43 +253,45 @@ BFC，块级格式化上下文，一个创建了新的BFC的盒子是独立布�
 		    }
 
 ## display
+### 有什么？
+- none	此元素不会被显示。
+- block	此元素将显示为块级元素，此元素前后会带有换行
+- inline	默认。此元素会被显示为内联元素，元素前后没有换行
+- inline-block	行内块元素。象行内元素一样显示，但其内容象块类型元素一样显示
+- list-item 象块类型元素一样显示，并添加样式列表标记。
+- table	此元素会作为块级表格来显示（类似 <table>），表格前后带有换行符。
+- inline-table	此元素会作为内联表格来显示
+- table-cell	此元素会作为一个表格单元格显示（类似 <td> 和<th>）
+- inherit 规定应该从父元素继承 display 属性的值。
 
-- 块状元素和行内元素的区别？
-	- width、height属性
-	- 是否换行
-	- width块状默认100%，行内（Inline）类型的元素则是根据自身的内容及子元素来决定宽度。
-	- 块状元素：P、DIV、UL、LI、DD、DT...；行内元素：A、IMG、SPAN、STRONG...
+### display:block和inline的区别？
+- width、height属性block可以设置，inline不能设置
+- 是否换行
+- block的width默认100%，inline则是根据自身的内容及子元素来决定宽度。
 
-- 列出display的值，说明他们的作用。
-		
-		- none	此元素不会被显示。
-		- block	此元素将显示为块级元素，此元素前后会带有换行
-		- inline	默认。此元素会被显示为内联元素，元素前后没有换行
-		- inline-block	行内块元素。象行内元素一样显示，但其内容象块类型元素一样显示
-		- list-item 象块类型元素一样显示，并添加样式列表标记。
-		- table	此元素会作为块级表格来显示（类似 <table>），表格前后带有换行符。
-		- inline-table	此元素会作为内联表格来显示
-		- table-cell	此元素会作为一个表格单元格显示（类似 <td> 和<th>）
-		- inherit 规定应该从父元素继承 display 属性的值。
+### inline-block
 
-- display:none和visibility:hidden的区别？
-	- display:none  隐藏对应的元素，在文档布局中不再给它分配空间，它各边的元素会合拢，就当他从来不存在。
-	- visibility:hidden  隐藏对应的元素，但是在文档布局中仍保留原来的空间。
+inline-block空隙怎么解决
+- 不换行，或前一个闭合和后一个开始连在一起
+- 不闭合标签
+- 父元素font-size:0
+- letter-spacing 父元素-3px 子元素0
+- word-spacing 父元素 -6px 子元素0
+- 负margin -3px
 
-- position跟display、margin collapse、overflow、float这些特性相互叠加后会怎么样？
-	- position和float和display的关系： "position:absolute" 和 "position:fixed" 优先级最高，有它存在的时候，浮动不起作用，'display' 的值也需要调整； 其次，元素的 'float' 特性的值不是 "none" 的时候或者它是根元素（body）的时候，调整 'display' 的值； 最后，非根元素，并且非浮动元素，并且非绝对定位的元素，'display' 特性值同设置值。（display大概的转换规则：inline-table转为table，其他常见的转为block,list-item保持）
+### display:none和visibility:hidden的区别？
+- display:none  隐藏对应的元素，在文档布局中不再给它分配空间，它各边的元素会合拢，就当他从来不存在。
+- visibility:hidden  隐藏对应的元素，但是在文档布局中仍保留原来的空间。
+
+## position跟display、margin collapse、overflow、float这些特性相互叠加后会怎么样？
+
+position和float和display的关系： "position:absolute" 和 "position:fixed" 优先级最高，有它存在的时候，浮动不起作用，'display' 的值也需要调整； 其次，元素的 'float' 特性的值不是 "none" 的时候或者它是根元素（body）的时候，调整 'display' 的值； 最后，非根元素，并且非浮动元素，并且非绝对定位的元素，'display' 特性值同设置值。（display大概的转换规则：inline-table转为table，其他常见的转为block,list-item保持）
 
 这从另一个侧面说明了一个问题：浮动或绝对定位的元素，只能是块元素或表格。
 
 [http://www.cnblogs.com/jackyWHJ/p/3756087.html](http://www.cnblogs.com/jackyWHJ/p/3756087.html)
 
-- inline-block空隙怎么解决
-	- 不换行，或前一个闭合和后一个开始连在一起
-	- 不闭合标签
-	- 父元素font-size:0
-	- letter-spacing 父元素-3px 子元素0
-	- word-spacing 父元素 -6px 子元素0
-	- 负margin -3px
+
 
 
 
