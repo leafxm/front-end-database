@@ -31,7 +31,7 @@
 
 行内样式1000 -- id100 -- 类、伪类、属性选择器10 -- 类型选择器、伪元素选择器1  
 
-通过相加计算大的优先级高，值相等的话后声明的优先级高。如果权重相同，则最后定义的样式会起作用，但是应该避免这种情况出现
+通过相加计算大的优先级高，值相等的话后声明的优先级高。如果权重相同，则最后定义的样式会起作用，但是应该避免这种情况出现。
 
 ### 优化方式
 浏览器从右到左解析css选择符，并且越具体的选择符查找效率越高（比如id显然高于标签选择符）。
@@ -90,7 +90,7 @@
 - 不可继承的样式：border padding margin width height（盒模型）
 
 ### 书写顺序
-1. 位置属性(position, top, right, z-index, display, float等)
+1. 位置属性(position, top, left, z-index, display, float等)
 2. 大小(width, height, padding, margin)
 3. 文字系列(font, line-height, letter-spacing, color- text-align等)
 4. 背景(background, border等)
@@ -160,13 +160,7 @@ BFC，块级格式化上下文，一个创建了新的BFC的盒子是独立布�
 - 非块级格式上下文中display的值为inline-block、table-cell、table-caption
 - 自身也在块级格式上下文中则还需要overflow的值不为visible
 
-BFC有以下特性：
-- 内部的Box会在垂直方向，从顶部开始一个接一个地放置。
-- Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生叠加。（产生外边距叠加）
-- 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。（导致左边重合）
-- BFC的区域不会与float box叠加。（解决左边重合）
-- BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然。（解决外边距叠加）
-- 计算BFC的高度时，浮动元素也参与计算。（解决浮动塌陷）
+
 
 ## 定位方式
 
@@ -333,6 +327,8 @@ inline-block空隙怎么解决
 二、display和position、float的关系
 float的值不为none、position的值为absolute或fixed着两种情况，元素的display值会有调整，大概的转换规则为inline-table转为table，其他常见的转为block,list-item保持。
 
+具体参看[http://www.cnblogs.com/jackyWHJ/p/3756087.html](http://www.cnblogs.com/jackyWHJ/p/3756087.html)
+
 三、margin collapse 和display、float、position、overflow的关系
 BFC（block formatting context）中相邻的两个块级盒，上一个box的下边距会跟下一个box的上边距发生叠加，即两者取最大的，而不是相加。行内框、浮动框或绝对定位框之间的外边距不会叠加。
 
@@ -341,13 +337,21 @@ BFC（block formatting context）中相邻的两个块级盒，上一个box的�
 - float的值不为none
 - position的值为absolute或fixed
 - 非块级格式上下文中display的值为inline-block、table-cell、table-caption
-- 自身也在块级格式上下文中则还需要overflow的值不为visible
+- 自身也在块级格式上下文中的盒则还需要overflow的值不为visible
 
-行内块不叠加是因为它不生成BFC，而浮动框、绝对定位框和设置了overflow不为visible的元素不叠加是因为它们生成了新的BFC，不在同一BFC中自然不叠加了。
+行内块不叠加是因为它不生成BFC，而浮动框、绝对定位框和设置了overflow不为visible的元素不叠加是因为它们生成了新的BFC，不在同一BFC中自然不叠加了。这里可以直接给后一个元素设置浮动或绝对定位属性，而overflow得新加一个父元素在父元素中设置。
 
 
 四、overflow和float、margin collapse的关系
 当overflow的值不为visible时可以生成BFC。
+
+BFC有以下特性：
+- 内部的Box会在垂直方向，从顶部开始一个接一个地放置。
+- Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生叠加。（产生外边距叠加）
+- 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。（导致左边重合）
+- BFC的区域不会与float box叠加。（解决左边重合）
+- BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然。（解决外边距叠加）
+- 计算BFC的高度时，浮动元素也参与计算。（解决浮动塌陷）
 
 解决浮动塌陷：可以给浮动元素父元素设置overflow:hidden(或其他不为visible的值）使父元素生成BFC来解决浮动塌陷问题。
 
@@ -355,7 +359,9 @@ BFC（block formatting context）中相邻的两个块级盒，上一个box的�
 
 解决margin collapse：给外边距叠加的元素之一加上一个设置了overflow属性不为visible的父元素，生成新的BFC，外边距就不叠加了。因为此时那两个元素不处于一个BFC了。
 
-[http://www.cnblogs.com/jackyWHJ/p/3756087.html](http://www.cnblogs.com/jackyWHJ/p/3756087.html)
+具体参看 http://www.html-js.com/article/1866
+
+
 
 
 
