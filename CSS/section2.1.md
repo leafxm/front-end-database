@@ -114,6 +114,8 @@
 ### 是什么？
 盒模型包括： 内容(content)、填充(padding)、边框(border)、边界(margin)。 
 
+![盒模型](http://www.w3.org/TR/2011/REC-CSS2-20110607/images/boxdim.png)
+
 有两种：IE 盒子模型和标准 W3C 盒子模型。区别是元素width、height属性的计算方式不同，W3C盒模型元素宽高只对内容部分计算，而IE是对content+左右padding+左右border计算。
 
 ### CSS3中的新属性 box-sizing
@@ -134,12 +136,37 @@
 一般来说， 垂直外边距叠加有三种情况：
 1. 元素自身叠加 当元素没有内容（即空元素）、内边距、边框时， 它的上下边距就相遇了， 即会产生叠加（垂直方向）。 当为元素添加内容、 内边距、 边框任何一项， 就会取消叠加。
 2. 相邻元素叠加 相邻的两个元素， 如果它们的上下边距相遇，即会产生叠加。
-3.  包含（父子）元素叠加 如果父元素没有border和padding时，它的第一个子box的的margin也能跟它的上一个容器的margin发生叠加。添加border或padding或者父元素在其内部创建新的BFC时即会取消叠加。
+3.  包含（父子）元素叠加 如果父元素没有border和padding时，它的第一个子box的上边缘会和它重叠，且子元素的margin也参与到和父元素上一个元素margin叠加的计算。添加border或padding或者父元素在其内部创建新的BFC时即会取消叠加。
 
 计算方式：margin值符号相同取绝对值大的，符号不同先分成正、负两种，分别取最大绝对值再两者叠加。如果有两个父元素，父元素中又有子元素，都符合以上margin叠加2，3点情况，那么要一起计算，把所有margin值放在一起按前面所说规则计算。
 
 参考 [CSS框模型](http://www.w3help.org/zh-cn/kb/006/)和[谈外margin collapsing（外边距叠加）](http://www.cnblogs.com/winter-cn/archive/2012/11/16/2772562.html)
 
+### 普通流和格式化上下文
+普通流是元素按照其在 HTML 中的位置顺序决定排布的过程，大部分box排布在普通流中。而普通流中的box一定位于某一格式化上下文，有上文提到的BFC（块级格式化上下文）还有一种IFC（行内格式化上下文）。
+
+在BFC中，盒呈纵向排布，在IFC中，盒则呈横向排布。
+
+任何一个IFC不能直接放入BFC中，在BFC中的行内元素会被匿名的块级盒包裹。
+
+BFC，块级格式化上下文，一个创建了新的BFC的盒子是独立布局的，盒子里面的子元素的样式不会影响到外面的元素。在同一个BFC中的两个相邻的块级盒在垂直方向（和布局方向有关系）的margin会发生折叠。
+
+在进行盒子元素布局的时候， BFC 提供了一个环境， 在这个环境中按照一定规则进行布局不会影响到其它环境中的布局。如果一个元素符合了成为 BFC 的条件，该元素内部元素的布局和定位就和外部元素互不影响(除非内部的盒子建立了新的  BFC)， 是一个隔离了的独立容器。
+
+规定满足下列CSS声明之一的元素便会生成BFC。元素
+
+- float的值不为none
+- position的值为absolute或fixed
+- 非块级格式上下文中display的值为inline-block、table-cell、table-caption
+- 自身也在块级格式上下文中则还需要overflow的值不为visible
+
+BFC有以下特性：
+- 内部的Box会在垂直方向，从顶部开始一个接一个地放置。
+- Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生叠加。（产生外边距叠加）
+- 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。（导致左边重合）
+- BFC的区域不会与float box叠加。（解决左边重合）
+- BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然。（解决外边距叠加）
+- 计算BFC的高度时，浮动元素也参与计算。（解决浮动塌陷）
 
 ## 定位方式
 
@@ -232,20 +259,6 @@ z-index属性目前只有在position:relative、position:absolute参与的情况
 参考 [深入理解CSS中的层叠上下文和层叠顺序](http://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/) 和
 [不起眼的 z-index 却能牵扯出这么大的学问](http://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651550819&idx=1&sn=7693f3c2a9d925bf069a08de90705682&scene=1&srcid=0508Uhp17Oga5IQzT9HDhUac#rd)
 
-### BFC 规范
-W3C CSS 2.1 规范中的一个概念,它决定了元素如何对其内容进行定位,以及与其他元素的关系和相互作用。
-
-BFC，块级格式化上下文，一个创建了新的BFC的盒子是独立布局的，盒子里面的子元素的样式不会影响到外面的元素。在同一个BFC中的两个相邻的块级盒在垂直方向（和布局方向有关系）的margin会发生折叠。
-
-在进行盒子元素布局的时候， BFC 提供了一个环境， 在这个环境中按照一定规则进行布局不会影响到其它环境中的布局。比如浮动元素会形成 BFC，浮动元素内部子元素的主要受该浮动元素影响，两个浮动元素之间是互不影响的。也就是说，如果一个元素符合了成为 BFC 的条件，该元素内部元素的布局和定位就和外部元素互不影响(除非内部的盒子建立了新的  BFC)， 是一个隔离了的独立容器。
-
-规定满足下列CSS声明之一的元素便会生成BFC。
-父元素
-
-	float的值不为none
-	overflow的值不为visible
-	display的值为inline-block、table-cell、table-caption
-	position的值为absolute或fixed
 
 
 ### 居中
@@ -274,12 +287,24 @@ BFC，块级格式化上下文，一个创建了新的BFC的盒子是独立布�
 - table-cell	此元素会作为一个表格单元格显示（类似 <td> 和<th>）
 - inherit 规定应该从父元素继承 display 属性的值。
 
+
+元素的display属性会决定盒是行内级还是块级：
+
+- block, table, flex, grid, list-item 为块级
+- inline, inline-block, inline-table, inline-flex, inline-grid 为行内级
+
+元素display属性和格式上下文的关系：
+
+- display值为table或者inline-table的元素将会生成表格（table），表格内部会使用特殊的格式化方式来排布其内部元素。
+- display值为flex或者inline-flex的元素将会生成自适应容器（flex container），自适应容器在其内部产生自适应格式化上下文（flex formatting context）。
+
 ### display:block和inline的区别？
 - width、height属性block可以设置，inline不能设置
 - 是否换行
 - block的width默认100%，inline则是根据自身的内容及子元素来决定宽度。
 
 ### inline-block
+inline-block是元素在父元素中像行内元素一样的表现（可横排），但是它自身又向块元素一样可设置宽高，可容纳块元素。
 
 inline-block空隙怎么解决
 - 不换行，或前一个闭合和后一个开始连在一起
@@ -295,9 +320,40 @@ inline-block空隙怎么解决
 
 ## position跟display、margin collapse、overflow、float这些特性相互叠加后会怎么样？
 
-position和float和display的关系： "position:absolute" 和 "position:fixed" 优先级最高，有它存在的时候，浮动不起作用，'display' 的值也需要调整； 其次，元素的 'float' 特性的值不是 "none" 的时候或者它是根元素（body）的时候，调整 'display' 的值； 最后，非根元素，并且非浮动元素，并且非绝对定位的元素，'display' 特性值同设置值。（display大概的转换规则：inline-table转为table，其他常见的转为block,list-item保持）
+一、position和float的关系
+ 
+1.同时应用
+- position:relative和float：元素同时应用了position: relative、float、（top / left / bottom / right）属性后，则元素先浮动到相应的位置，然后再根据（top / left / bottom / right）所设置的距离来发生偏移。
+- position:absolute和float：元素同时应用了position: absolute及float属性，则float失效。
+  
+2.覆盖问题（层叠上下文解释）
+- 两个位置相同的同级元素，设置postion:absolute的元素会覆盖设置float的元素
+- 如果没有把float的元素的position设置成relative的话，你想通过设置float元素的z-index来达到覆盖position:absolute是无效的。
 
-这从另一个侧面说明了一个问题：浮动或绝对定位的元素，只能是块元素或表格。
+二、display和position、float的关系
+float的值不为none、position的值为absolute或fixed着两种情况，元素的display值会有调整，大概的转换规则为inline-table转为table，其他常见的转为block,list-item保持。
+
+三、margin collapse 和display、float、position、overflow的关系
+BFC（block formatting context）中相邻的两个块级盒，上一个box的下边距会跟下一个box的上边距发生叠加，即两者取最大的，而不是相加。行内框、浮动框或绝对定位框之间的外边距不会叠加。
+
+规定满足下列CSS声明之一的元素便会生成BFC。元素
+
+- float的值不为none
+- position的值为absolute或fixed
+- 非块级格式上下文中display的值为inline-block、table-cell、table-caption
+- 自身也在块级格式上下文中则还需要overflow的值不为visible
+
+行内块不叠加是因为它不生成BFC，而浮动框、绝对定位框和设置了overflow不为visible的元素不叠加是因为它们生成了新的BFC，不在同一BFC中自然不叠加了。
+
+
+四、overflow和float、margin collapse的关系
+当overflow的值不为visible时可以生成BFC。
+
+解决浮动塌陷：可以给浮动元素父元素设置overflow:hidden(或其他不为visible的值）使父元素生成BFC来解决浮动塌陷问题。
+
+生成新的BFC解决左边重合:在一个BFC中，每个元素的margin box的左边，与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。所以当前一个元素设置float:left时，它脱离文档流，后一个盒子就会向上走，而它们的左边都和包含块的border box想接触，所以在没设置margin的情况下会导致重叠。这时候可以用overflow来给后一个元素生成新的BFC，它就不会和包含块的border box 左边相接触了。（可以用于两栏布局）
+
+解决margin collapse：给外边距叠加的元素之一加上一个设置了overflow属性不为visible的父元素，生成新的BFC，外边距就不叠加了。因为此时那两个元素不处于一个BFC了。
 
 [http://www.cnblogs.com/jackyWHJ/p/3756087.html](http://www.cnblogs.com/jackyWHJ/p/3756087.html)
 
