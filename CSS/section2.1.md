@@ -159,10 +159,16 @@
 
 - float的值不为none
 - position的值为absolute或fixed
-- 非块级格式上下文中display的值为inline-block、table-cell、table-caption
-- 自身也在块级格式上下文中则还需要overflow的值不为visible
+- display的值为inline-block、table-cell、table-caption
+- overflow的值不为visible
 
-
+BFC有以下特性：
+- 内部的Box会在垂直方向，从顶部开始一个接一个地放置。
+- Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生叠加。（产生外边距叠加）
+- 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。（导致左边重合）
+- BFC的区域不会与float box叠加。（解决左边重合）
+- BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然。（解决外边距叠加）
+- 计算BFC的高度时，浮动元素也参与计算。（解决浮动塌陷）
 
 ## 定位方式
 
@@ -346,14 +352,6 @@ BFC（block formatting context）中相邻的两个块级盒，上一个box的�
 
 四、overflow和float、margin collapse的关系
 当overflow的值不为visible时可以生成BFC。
-
-BFC有以下特性：
-- 内部的Box会在垂直方向，从顶部开始一个接一个地放置。
-- Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生叠加。（产生外边距叠加）
-- 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。（导致左边重合）
-- BFC的区域不会与float box叠加。（解决左边重合）
-- BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然。（解决外边距叠加）
-- 计算BFC的高度时，浮动元素也参与计算。（解决浮动塌陷）
 
 解决浮动塌陷：可以给浮动元素父元素设置overflow:hidden(或其他不为visible的值）使父元素生成BFC来解决浮动塌陷问题。
 
