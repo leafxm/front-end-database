@@ -13,6 +13,6 @@
 * [JS](JS/README.md)
    * [基础知识](JS/jsbase.md)
    * [函数](JS/jsfunc.md)
-   * [对象](JS/js_obj.md)
+   * [对象](JS/jsobj.md)
    * [面试题目](JS/js_problem.md)
 
