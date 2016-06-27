@@ -14,5 +14,5 @@
    * [基础知识](JS/jsbase.md)
    * [函数](JS/jsfunc.md)
    * [对象](JS/jsobj.md)
-   * [面试题目](JS/js_problem.md)
+   * [面试题目](JS/jsproblem.md)
 
