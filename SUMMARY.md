@@ -12,7 +12,7 @@
    * [面试题目](CSS/section2.4.md)
 * [JS](JS/README.md)
    * [基础知识](JS/jsbase.md)
-   * [函数](JS/js_func.md)
+   * [函数](JS/jsfunc.md)
    * [对象](JS/js_obj.md)
    * [面试题目](JS/js_problem.md)
 
