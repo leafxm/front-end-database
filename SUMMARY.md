@@ -10,7 +10,7 @@
    * [关于CSS3](CSS/section2.2.md)
    * [关于布局](CSS/section2.3.md)
    * [面试题目](CSS/section2.4.md)
-* [JS](JS/README.md)
+* [JS](JS/readme.md)
    * [基础知识](JS/jsbase.md)
    * [函数](JS/jsfunc.md)
    * [对象](JS/jsobj.md)
