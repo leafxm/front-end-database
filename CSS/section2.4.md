@@ -21,6 +21,17 @@
 	- 可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决.
  
 - overflow: scroll时不能平滑滚动的问题怎么处理？
+- - 用纯CSS创建一个三角形的原理是什么？
+
+把上、左、右三条边隐藏掉（颜色设为 `transparent`）
+			
+	#demo {
+		width: 0;
+		height: 0;
+		border-width: 20px;
+		border-style: solid;
+		border-color: transparent transparent red transparent;
+	}
 
 
 ## 方法
