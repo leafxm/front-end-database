@@ -10,6 +10,8 @@ ES6引入新的原始数据类型Symbol,表示独一无二的值。
 
 注意隐式转换。
 
+delete 操作符，用来删除对象的属性（不能用来操作变量
+
 ## 语句
 if,while,do-while,for,for-in,label,with等
 
@@ -43,6 +45,11 @@ JS引擎在进入一段可执行代码时，需要完成三个初始化工作：
 2. 创建函数A的作用域链
 3. 创建当前函数的活动对象(activation object)AO,AO中包含了函数的形参、arguments对象、this对象、以及局部变量和内部函数的定义，然后AO会被推入作用域链的顶端。这里还会对在其中定义的函数添加其作用域为这个函数（所以函数的作用域是它定义的环境）。
 
+参考
+[ECMA-262-3 in detail. Chapter 1. Execution Contexts.](http://dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/)
+[ECMA-262-3 in detail. Chapter 2. Variable object.](http://dmitrysoshnikov.com/ecmascript/chapter-2-variable-object/) 
+
+
 ### 变量提升
 因为在函数执行时，刚进入函数就会初始化变量和函数声明，变量赋值为undefined，函数声明为它本身，所以，在函数中变量定义前就可以访问到变量了。
 
@@ -56,3 +63,9 @@ this是在函数执行时确认值的。全局范围的this指向window对象。
 3. 函数被当做构造函数调用时，this指向这个新对象
 4. DOM事件处理程序中，this指向这个处理程序被所绑定到的HTML DOM节点。
 
+## Event Loop
+js引擎是单线程的，但是浏览器中还有别的web APIs(如DOM，ajax，setTimeout），当执行这些代码时，js引擎会把操作交给相应的web API，然后继续执行以后的代码，web API执行完相应操作后，将结果放入callback queue，当js引擎空闲时event loop会去callback queue查看是否有待执行的回调函数，如果有的话js引擎会去依次执行这些回调函数。
+
+![](http://image.beekka.com/blog/2014/bg2014100802.png)
+
+参考 [Philip Roberts: What the heck is the event loop anyway?](http://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html)
