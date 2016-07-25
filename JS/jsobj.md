@@ -11,6 +11,7 @@ ES6对对象进行了扩展：
 * 可以在对象中只写属性名，属性值则为属性名代表的变量；方法可以简写为 func\(\){}这种形式
 
 * 对象字面量定义时，可以在‘\[\]'内用表达式作为属性名
+
 * Object.is\(\)比较两个值是否严格相等，+0不等于-0，NaN等于自身
 * Object.assign\(\)，用于对象合并， 第一个参数是目标对象。后面都是源对象，同名属性后面覆盖前面的，只复制自身属性，浅拷贝，可以用来为对象添加属性和方法、以空对象为目标来克隆对象、合并多个对象、为属性指定默认值等。
 * Object.getOwnPropertyDescriptor\(对象，属性名\)方法获取属性的描述对象
@@ -52,6 +53,7 @@ ES6中新增方法：
 * copyWithin\(targetStart, start\[, end = this.length\]\) 数组内部成员赋值到其他位置，返回当前数组，会改变原数组
 
 * find\(_callback_\[, _thisArg_\]\)和findIndex\(_callback_\[, _thisArg_\]\)查找第一个回调函数返回true的元素或者元素索引
+
 * fill\(value\[, start = 0\[, end = this.length\]\]\) 填充，返回当前数组并改变原数组
 * entries\(\)，keys\(\)和values\(\) 分别表示对数组键值对、键名、键值遍历，返回相应迭代器
 * includes\(searchElement\[, fromIndex\]\) 判断数组是否包含指定值
@@ -128,6 +130,7 @@ trim\(\)方法，去除前后空格
 * search\(\)，返回第一个匹配项的索引
 
 * replace\(\)，第一个参数可以是字符串或正则表达式，第二个参数是字符串或函数，函数的参数有：模式的匹配项、模式匹配项在字符串中的位置和原始字符串
+
 * split\(\)
 
 localeCompare\(\)方法，比较字符串
@@ -175,4 +178,33 @@ ES6扩展了指数运算符\(\*\*）和以下方法：
 
 * 三角函数方法：sinh\(\),cosh\(\),tanh\(\),asinh\(\),acosh\(\),atanh\(\)
 
+
+
+## ES6中的Map和Set
+
+### Map
+
+它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。也就是说，Object结构提供了“字符串—值”的对应，Map结构提供了“值—值”的对应，是一种更完善的Hash结构实现。如果你需要“键值对”的数据结构，Map比Object更合适。
+
+属性：size表示有多少个键值对
+
+操作方法： set\(key,value\) 返回Map 本身，可以采用链式写法 ，get\(key\)，has\(key\)，delete\(key\)，clear\(\)
+
+遍历方法： keys\(\),values\(\),entries\(\),forEach\(\) 
+
+WeakMap:键名所指对象不计入垃圾回收，没有遍历操作、size属性、clear方法，可用于DOM节点做键名时
+
+### Set
+
+没有重复值的数组
+
+属性：Set.prototype.constructor,Set.prototype.size\(成员总数）
+
+操作方法：add\(value\),delete\(value\),has\(value\),clear\(\)
+
+遍历操作：keys\(\),values\(\),entries\(\),forEach\(\)
+
+应用： \[...new Set\(array\)\] 去除重复数组成员，\[...set\]将set结构变为数组
+
+WeakSet:成员只能是对象，对象都是弱引用，垃圾回收机制不考虑，不可遍历，没有clear方法,可用于存储DOM节点
 
