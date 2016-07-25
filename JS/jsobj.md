@@ -6,6 +6,19 @@
 
 访问属性：1.obj\['name'\] 2.obj.name 第一种可以通过变量访问属性，可以使用会导致语法错的的字符串表示属性名
 
+ES6对对象进行了扩展：
+
+* 可以在对象中只写属性名，属性值则为属性名代表的变量；方法可以简写为 func\(\){}这种形式
+
+* 对象字面量定义时，可以在‘\[\]'内用表达式作为属性名
+* Object.is\(\)比较两个值是否严格相等，+0不等于-0，NaN等于自身
+* Object.assign\(\)，用于对象合并， 第一个参数是目标对象。后面都是源对象，同名属性后面覆盖前面的，只复制自身属性，浅拷贝，可以用来为对象添加属性和方法、以空对象为目标来克隆对象、合并多个对象、为属性指定默认值等。
+* Object.getOwnPropertyDescriptor\(对象，属性名\)方法获取属性的描述对象
+* 属性的遍历:for...in不含Symbol的自身和继承的可枚举属性，Object.keys\(obj\)不含Symbol的自身可枚举属性,Object.getOwnPropertyNames\(obj\)返回不含Symbol包含不可枚举属性的包含对象自身所有属性的数组,Object.getOwnPropertySymbols\(obj\)返回包含自身所有Symbol属性的数组,Reflect.ownKeys\(obj\)返回对象自身所有属性。
+* 关于原型的\_\_proto\_\_属性，和Object.setPrototypeOf\(\)和Object.getPrototypeOf\(\)方法
+* Object.values\(\)和Object.entries\(\)返回相应数组
+* 
+
 ## Array类型
 
 创建方法：1.new Array\(\) 传递一个数字参数表示生成数组长度，其他表示数组元素内容 2.数组字面量
@@ -37,6 +50,7 @@ ES6中新增方法：
 * Array.of\(element0\[, element1\[, ...\[, elementN\]\]\]\) 把元素转换为数组，弥补Array\(\)和new Array\(\)的不足
 
 * copyWithin\(targetStart, start\[, end = this.length\]\) 数组内部成员赋值到其他位置，返回当前数组，会改变原数组
+
 * find\(_callback_\[, _thisArg_\]\)和findIndex\(_callback_\[, _thisArg_\]\)查找第一个回调函数返回true的元素或者元素索引
 * fill\(value\[, start = 0\[, end = this.length\]\]\) 填充，返回当前数组并改变原数组
 * entries\(\)，keys\(\)和values\(\) 分别表示对数组键值对、键名、键值遍历，返回相应迭代器
@@ -68,6 +82,7 @@ pattern是可以包含字符类、限定符、分组、向前查找和反向引�
 
 * toString\(\),toLocaleString\(\)，返回正则表达式字面量
 
+
 构造函数的属性：input $\_,lastMatch $&,lastParen $+,leftContext $\`,mutiline $\*,rightContext $'
 
 ## Function类型
@@ -79,8 +94,6 @@ ES6中对函数进行了扩展，函数参数可以默认声明，且length返�
 name属性做了修改，对匿名函数会返回实际的函数名。
 
 箭头函数，函数体内this就是定义时所在对象。
-
-
 
 ## 基本包装类型Boolean、Number 和String
 
@@ -113,6 +126,7 @@ trim\(\)方法，去除前后空格
 * match\(\)，同RegExp的exec\(\)方法
 
 * search\(\)，返回第一个匹配项的索引
+
 * replace\(\)，第一个参数可以是字符串或正则表达式，第二个参数是字符串或函数，函数的参数有：模式的匹配项、模式匹配项在字符串中的位置和原始字符串
 * split\(\)
 
@@ -160,8 +174,5 @@ ES6扩展了指数运算符\(\*\*）和以下方法：
 * 对数方法：log1p\(\),log10\(\),log2\(\)
 
 * 三角函数方法：sinh\(\),cosh\(\),tanh\(\),asinh\(\),acosh\(\),atanh\(\)
-
-
-
 
 
