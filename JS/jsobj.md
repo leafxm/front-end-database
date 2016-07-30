@@ -15,11 +15,11 @@ ES6对对象进行了扩展：
 * Object.is\(\)比较两个值是否严格相等，+0不等于-0，NaN等于自身
 
 * Object.assign\(\)，用于对象合并， 第一个参数是目标对象。后面都是源对象，同名属性后面覆盖前面的，只复制自身属性，浅拷贝，可以用来为对象添加属性和方法、以空对象为目标来克隆对象、合并多个对象、为属性指定默认值等。
+
 * Object.getOwnPropertyDescriptor\(对象，属性名\)方法获取属性的描述对象
 * 属性的遍历:for...in不含Symbol的自身和继承的可枚举属性，Object.keys\(obj\)不含Symbol的自身可枚举属性,Object.getOwnPropertyNames\(obj\)返回不含Symbol包含不可枚举属性的包含对象自身所有属性的数组,Object.getOwnPropertySymbols\(obj\)返回包含自身所有Symbol属性的数组,Reflect.ownKeys\(obj\)返回对象自身所有属性。
 * 关于原型的\_\_proto\_\_属性，和Object.setPrototypeOf\(\)和Object.getPrototypeOf\(\)方法
 * Object.values\(\)和Object.entries\(\)返回相应数组
-* 
 
 ## Array类型
 
@@ -58,6 +58,7 @@ ES6中新增方法：
 * fill\(value\[, start = 0\[, end = this.length\]\]\) 填充，返回当前数组并改变原数组
 
 * entries\(\)，keys\(\)和values\(\) 分别表示对数组键值对、键名、键值遍历，返回相应迭代器
+
 * includes\(searchElement\[, fromIndex\]\) 判断数组是否包含指定值
 
 数组的空位：ES5中forEach\(\),filter\(\),every\(\)和some\(\)会跳过空位，map\(\)跳过空位但保留这个值，join\(\)和toString\(\)把空位视为undefined转换为空字符串。ES6中将空位转为undefined.
