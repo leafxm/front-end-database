@@ -1,4 +1,4 @@
-# 对象
+# 引用类型
 
 ## Obj类型
 
@@ -13,6 +13,7 @@ ES6对对象进行了扩展：
 * 对象字面量定义时，可以在‘\[\]'内用表达式作为属性名
 
 * Object.is\(\)比较两个值是否严格相等，+0不等于-0，NaN等于自身
+
 * Object.assign\(\)，用于对象合并， 第一个参数是目标对象。后面都是源对象，同名属性后面覆盖前面的，只复制自身属性，浅拷贝，可以用来为对象添加属性和方法、以空对象为目标来克隆对象、合并多个对象、为属性指定默认值等。
 * Object.getOwnPropertyDescriptor\(对象，属性名\)方法获取属性的描述对象
 * 属性的遍历:for...in不含Symbol的自身和继承的可枚举属性，Object.keys\(obj\)不含Symbol的自身可枚举属性,Object.getOwnPropertyNames\(obj\)返回不含Symbol包含不可枚举属性的包含对象自身所有属性的数组,Object.getOwnPropertySymbols\(obj\)返回包含自身所有Symbol属性的数组,Reflect.ownKeys\(obj\)返回对象自身所有属性。
@@ -55,6 +56,7 @@ ES6中新增方法：
 * find\(_callback_\[, _thisArg_\]\)和findIndex\(_callback_\[, _thisArg_\]\)查找第一个回调函数返回true的元素或者元素索引
 
 * fill\(value\[, start = 0\[, end = this.length\]\]\) 填充，返回当前数组并改变原数组
+
 * entries\(\)，keys\(\)和values\(\) 分别表示对数组键值对、键名、键值遍历，返回相应迭代器
 * includes\(searchElement\[, fromIndex\]\) 判断数组是否包含指定值
 
@@ -133,6 +135,7 @@ trim\(\)方法，去除前后空格
 
 * split\(\)
 
+
 localeCompare\(\)方法，比较字符串
 fromCharCode\(\)方法，把字符编码转换为字符
 
@@ -179,7 +182,6 @@ ES6扩展了指数运算符\(\*\*）和以下方法：
 * 三角函数方法：sinh\(\),cosh\(\),tanh\(\),asinh\(\),acosh\(\),atanh\(\)
 
 
-
 ## ES6中的Map和Set
 
 ### Map
@@ -190,7 +192,7 @@ ES6扩展了指数运算符\(\*\*）和以下方法：
 
 操作方法： set\(key,value\) 返回Map 本身，可以采用链式写法 ，get\(key\)，has\(key\)，delete\(key\)，clear\(\)
 
-遍历方法： keys\(\),values\(\),entries\(\),forEach\(\) 
+遍历方法： keys\(\),values\(\),entries\(\),forEach\(\)
 
 WeakMap:键名所指对象不计入垃圾回收，没有遍历操作、size属性、clear方法，可用于DOM节点做键名时
 
