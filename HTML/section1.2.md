@@ -113,9 +113,16 @@ web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影�
 在dragover中一定要执行preventDefault()，否则ondrop事件不会被触发。
 
 dataTransfer 对象是事件e的对象，用来保存被拖拽的数据。有用来设置拖拽效果的属性和用来设置拖拽数据的方法。
+dropEffect 属性可以知道被拖动的元素能够执行哪种放置行为（有none,move,copy,link)。只有搭配effectAllowed 属性才有用(ondragstart 事件处理程序中设置)。effectAllowed 属性表示允许拖动元素的哪种dropEffect。
 
 ## contentEditable 属性
 通过在元素上设置contentEditable="true"可以让元素变成可编辑状态。
 
 ## data 属性
 使用“data-”开头定义自定义属性。在js中可以通过getAttribute来获得，在css中可以通过attr()来获得，可以用于给hover伪类的content赋值。
+
+## 跨文档消息传递
+postMessage()方法接收两个参数：一条消息和一个表示消息接收方来自哪个域的字符串，接收到消息会触发message事件,其事件对象包含data，origin，source三个属性
+
+## 历史状态管理
+history.pushState()方法，该方法可以接收三个参数：状态对象、新状态的标题和可选的相对URL。还有popState()方法和replaceState方法。
