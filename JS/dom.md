@@ -12,10 +12,9 @@ parent 对象表示包含当前框架的框架，而self 对象则回指window
 
 框口大小：
 
-*  window.innerWidth\/Height 包含滚动条的浏览器视口完整尺寸，手机浏览器中表示visual viewport尺寸
+* window.innerWidth\/Height 包含滚动条的浏览器视口完整尺寸，手机浏览器中表示visual viewport尺寸
 
 * document. documentElement. clientWidth\/Height 不包含滚动条的浏览器视口尺寸，手机浏览器中表示layout vieport尺寸
-
 
 
 打开窗口：window.open\(\)。这个方法可以接收4 个参数：要加载的URL、窗口目标、一个特性字符串以及一个表示新页面是否取代浏览器历史记录中当前加载页面的布尔值。
@@ -42,7 +41,7 @@ DOM描绘了一个层次化的节点树。
 
 ### 节点类型
 
- node类型：Element类型、Text类型、Attr类型、comment类型、document类型、documentFragment类型。
+node类型：Element类型、Text类型、Attr类型、comment类型、document类型、documentFragment类型。
 
 每个节点都有属性NodeType，是用一个整数表示节点类型，如：元素element 1、属性attr 2、文本text 3、注释comments 8、文档document 9 。对Element类型来说，元素的nodeName属性 中保存都是元素的标签名。
 
@@ -69,6 +68,7 @@ DOM描绘了一个层次化的节点树。
 5. hasChildNodes方法：判断是否包含子节点
 
 对于DOM元素，有childElementCount,firstElementChild,lastElementChild,previousElementSibling,nextElementSibling\(避免IE9前对文本节点是否被返回的不一致性\)
+
 ### **节点创建型API**
 
 1. createElement
@@ -96,15 +96,11 @@ DOM描绘了一个层次化的节点树。
 5. document.querySelector 和 document.querySelectorAll 都是使用深度优先来获取元素，前者返回第一个匹配的元素，后者返回所有匹配元素，返回的是一个非即时的NodeList，ie8以下的浏览器不支持
 
 调用者也可以是一个元素
+
 ### **元素属性型API**
 
 1. element.setAttribute\(name,value\)
 2. element.getAttribute\(name\)
-
-### **元素样式型API**
-
-1. window.getComputedStyle\(element\[, pseudoElt\]\) window.getComputedStyle是用来获取应用到元素后的样式，假设某个元素并未设置高度而是通过其内容将其高度撑开，这时候要获取它的高度就要用到getComputedStyle
-2. element.getBoundingClientRect\(\); 返回元素的大小以及相对于浏览器可视窗口的位置
 
 ### DOM操作
 
@@ -124,11 +120,42 @@ DOM描绘了一个层次化的节点树。
 
 通过rows属性获得全部行，行的cells属性获得该行的列，它们有length属性获得个数，在事件中可以使用this.cellIndex和this.parentNode.rowIndex获得表格单元的行列数（从0计算）。
 
-
-
 ### HTML5中的DOM扩展
 
 classList属性，获得元素的类名，该属性还有add,contains,remove,toggle方法
+
+焦点管理：document.activeElement 属性，始终会引用DOM 中当前获得了焦点的元素
+
+document.readyState属性，值有loading和complete
+
+head属性
+
+charset属性
+
+自定义数据属性 dataset
+
+scrollIntoView\(\)方法 让元素可见
+
+### 样式表相关
+
+document.styleSheets获取文档所有样式表，获得样式表对象style属性（IE中是styleSheet属性\)，获得规则列表cssRules \|\| sheet.rules;
+
+CSSStyleRule 对象包含cssText、selectorText、style等属性
+
+插入规则：insertRule\(规则\),IE是sheet.addRule\(选择符，样式\)
+
+删除规则：deleteRule\(index\),IE是removeRule\(index\)
+
+window.getComputedStyle\(element\[, pseudoElt\]\) 用来获取应用到元素后的样式，假设某个元素并未设置高度而是通过其内容将其高度撑开，这时候要获取它的高度就要用到getComputedStyle，IE中使用元素的currentStyle 属性来获取。
+
+
+元素大小：
+
+* 偏移量 offsetHeight\/Width\/Left\/Top,left\top是相对于包含元素，可以用offsetParent 属性找到，而height\width是对border-box而言的，只读
+
+* 客户区大小 clientWidth 和clientHeight，相对于content-box + padding，只读
+* 滚动大小 scrollHeight\/Width\/Left\/Top ，分别表示在没有滚动条的情况下，元素内容的总高\宽度。和被隐藏在内容区域左\右侧的像素数（可以改变元素的滚动位置）。
+* 确定元素大小：element.getBoundingClientRect\(\); 返回元素的大小以及相对于浏览器可视窗口的位置 
 
 
 
