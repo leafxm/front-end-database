@@ -30,13 +30,13 @@ html5提供了让```<input>```的type特性有更多的值：
 ###2. datalist元素
 datalist 元素规定输入域的选项列表。列表通过 datalist 内的 option 元素创建的。
 
-<input id="awardWon" name="awardWon" type="text" list="awards">
-<datalist id="awards">
-  <select>
-    <option value="Best Picture"></option>
-    <option value="Best Director"></option>
-  </select>
-</datalist>
+	<input id="awardWon" name="awardWon" type="text" list="awards">
+	<datalist id="awards">
+	  <select>
+	    <option value="Best Picture"></option>
+	    <option value="Best Director"></option>
+	  </select>
+	</datalist>
 
 ### 3.output元素
 自动提交计算结果
@@ -68,36 +68,29 @@ HTML5 提供了两种在客户端存储数据的新方法：
 
 HTML5 使用 JavaScript 来存储和访问数据。
 
-### 和cookie的区别
-   - cookie数据始终在同源的http请求中携带（即使不需要），所以会在浏览器和服务器间来回传递。 sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存；
-   - sessionStorage和localStorage的存储空间更大；
-   - sessionStorage和localStorage有更多丰富易用的接口，比如setItem,getItem,removeItem,clear等方法，而cookie需要前端开发者自己封装setCookie，getCookie。
-   - sessionStorage和localStorage有各自独立的存储空间；
-   - 有期时间：
-    - localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
-    - sessionStorage  数据在当前浏览器窗口关闭后自动删除。
-    - cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
 
 ## Web socket
 是一种不同于HTTP的通信协议。最大特点是可以双向通信。事件驱动，常见事件有open、message、error、close等。使用send方法发送数据，监听message事件来接收服务器发回的数据。可以持续连接数据流，流量小，适合做监听状态的工作，游戏、股票、实时视频等。使用全双工工作方式。
 
-html5提供的Websocket不可见的iframeXHR长时间连接XHR Multipart Streaming<script>标签的长时间连接(可跨域)Javascript数据推送Commet：基于HTTP长连接的服务器推送技术SSE（Server-Send Event）：服务器推送数据新方式
 WebSocket是Web应用程序的传输协议，它提供了双向的，按序到达的数据流。他是一个HTML5协议，WebSocket的连接是持久的，他通过在客户端和服务器之间保持双工连接，服务器的更新可以被及时推送给客户端，而不需要客户端以一定时间间隔去轮询。
-
 
 
 ## Web Worker
 当在 HTML 页面中执行脚本时，页面的状态是不可响应的，直到脚本已完成。
+
 web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。主要作用是模拟出web多线程。子线程完全受主线程控制，不可访问 DOM APIs。
 
 可以用于：
-- 数据的计算和加密 如计算斐波拉契函数的值，特别费时；再比如文件的 MD5 值比对，一个大文件的 MD5 值计算也是很费时的。
+
+- 数据的计算和加密，如计算斐波拉契函数的值，特别费时；再比如文件的 MD5 值比对，一个大文件的 MD5 值计算也是很费时的。
 - 音、视频流的编解码工作，这些工作搞微信的技术人员应该没有少做。有兴趣的童鞋可以看看这个技术分享，是杭州的 hehe123 搞的一个WebRTC 分享，内容还不错。
-- 等等，你觉得费时间的事情都可以交给他做
+- 等等费时间的事情
 
 worker主线程,模拟多线程:
+
 1. 通过 worker = new Worker( url ) 加载一个JS文件来创建一个worker，同时返回一个worker实例。 
-2. 通过worker.postMessage( data ) 方法来向worker发送数据。 3. 绑定worker.onmessage方法来接收worker发送过来的数据。 
+2. 通过worker.postMessage( data ) 方法来向worker发送数据。 
+3. 绑定worker.onmessage方法来接收worker发送过来的数据。 
 4. 可以使用 worker.terminate() 来终止一个worker的执行。
 
 
@@ -108,16 +101,18 @@ worker主线程,模拟多线程:
 给元素设置draggable="true"，它就可以被拖拽了。通过拖放事件，可以控制拖放相关的各个方面。
 
 拖动一个元素时，将依次触发下列事件（作用于被拖动的元素）：
-	1. dragstart 按下鼠标键并开始移动鼠标时，会在被拖放的元素上触发
-	2. drag 元素被拖动期间会持续触发该事件
-	3. dragend 拖动停止时触发（无论是把元素放到了有效的放置目标，还是无效的放置目标上）
+
+1. dragstart 按下鼠标键并开始移动鼠标时，会在被拖放的元素上触发
+2. drag 元素被拖动期间会持续触发该事件
+3. dragend 拖动停止时触发（无论是把元素放到了有效的放置目标，还是无效的放置目标上）
 
 默认情况下，浏览器不会在拖动期间改变被拖动元素的外观，但你可以自己修改。不过，大多数浏览器会为正被拖动的元素创建一个半透明的副本，这个副本始终跟随着光标移动。
 
 当元素被拖放到一个有效的放置目标上时，下列事件会依次发生（作用于作为放置目标的元素）：
-	1. dragenter 元素被拖动到放置目标上时触发
-	2. dragover 被拖动的元素还在放置目标的范围内移动时，就会持续触发该事件
-	3. drop 被拖拽的元素在目标元素上同时鼠标放开触发该事件
+
+1. dragenter 元素被拖动到放置目标上时触发
+2. dragover 被拖动的元素还在放置目标的范围内移动时，就会持续触发该事件
+3. drop 被拖拽的元素在目标元素上同时鼠标放开触发该事件
 	
 在dragover中一定要执行preventDefault()，否则ondrop事件不会被触发。
 
