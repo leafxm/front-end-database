@@ -81,6 +81,9 @@ HTML5 使用 JavaScript 来存储和访问数据。
 ## Web socket
 是一种不同于HTTP的通信协议。最大特点是可以双向通信。事件驱动，常见事件有open、message、error、close等。使用send方法发送数据，监听message事件来接收服务器发回的数据。可以持续连接数据流，流量小，适合做监听状态的工作，游戏、股票、实时视频等。使用全双工工作方式。
 
+html5提供的Websocket不可见的iframeXHR长时间连接XHR Multipart Streaming<script>标签的长时间连接(可跨域)Javascript数据推送Commet：基于HTTP长连接的服务器推送技术SSE（Server-Send Event）：服务器推送数据新方式
+WebSocket是Web应用程序的传输协议，它提供了双向的，按序到达的数据流。他是一个HTML5协议，WebSocket的连接是持久的，他通过在客户端和服务器之间保持双工连接，服务器的更新可以被及时推送给客户端，而不需要客户端以一定时间间隔去轮询。
+
 
 
 ## Web Worker
@@ -91,6 +94,12 @@ web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影�
 - 数据的计算和加密 如计算斐波拉契函数的值，特别费时；再比如文件的 MD5 值比对，一个大文件的 MD5 值计算也是很费时的。
 - 音、视频流的编解码工作，这些工作搞微信的技术人员应该没有少做。有兴趣的童鞋可以看看这个技术分享，是杭州的 hehe123 搞的一个WebRTC 分享，内容还不错。
 - 等等，你觉得费时间的事情都可以交给他做
+
+worker主线程,模拟多线程:
+1. 通过 worker = new Worker( url ) 加载一个JS文件来创建一个worker，同时返回一个worker实例。 
+2. 通过worker.postMessage( data ) 方法来向worker发送数据。 3. 绑定worker.onmessage方法来接收worker发送过来的数据。 
+4. 可以使用 worker.terminate() 来终止一个worker的执行。
+
 
 ## 多媒体
 引入```<vidio>```和```<audio>```标签。
