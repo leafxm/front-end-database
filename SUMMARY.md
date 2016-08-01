@@ -18,5 +18,6 @@
     * [DOM](JS/dom.md)
     * [事件](JS/事件.md)
     * [AJAX](JS/ajax.md)
+    * [其他](JS/其他.md)
     * [面试题目](JS/jsproblem.md)
 
